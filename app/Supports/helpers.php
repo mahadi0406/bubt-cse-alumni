@@ -1,6 +1,8 @@
 <?php
 
 use App\Enums\MsgType;
+use App\Models\User;
+use Illuminate\Contracts\Auth\Authenticatable;
 
 if (! function_exists('msg')) {
     function msg(string $msg, MsgType $type = MsgType::success): array
@@ -9,6 +11,18 @@ if (! function_exists('msg')) {
             'msg' => $msg,
             'type' => $type
         ];
+    }
+}
+
+
+if (!function_exists('auth_user')) {
+    /**
+     * Get the currently authenticated users
+     * @return Authenticatable
+     */
+    function auth_user(): Authenticatable
+    {
+        return auth()->user();
     }
 }
 

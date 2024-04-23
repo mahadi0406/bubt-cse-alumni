@@ -40,21 +40,21 @@ class AuthController extends Controller
      */
     public function register(Request $request): view|RedirectResponse
     {
-
         try{
-            $data = $request->validate([
+            $request->validate([
                 'name' => 'required',
                 'email' => 'required|email|unique:users,email|unique:member_requests,email',
                 'password' => 'required',
                 'mobile' => 'required|min:11',
                 'intake' => 'required|integer',
                 'shift' => 'required',
-                'reference' => 'required_with:reference_by' . ($request->input('reference_by') == 'email'? '|email|': '|') . 'exists:users,' . $request->input('reference_by'),
+                'reference' => ['required_with:reference_by',
+                    $request->input('reference_by') == 'email' ? 'email' : '',
+                    'exists:users,email,' . $request->input('reference_by'),
+                ],
             ]);
 
-
-            $user = $this->user->createMemberJoiningRequest($request);
-
+            $this->user->createMemberJoiningRequest($request);
             return redirect()->back()->with(msg("We've accept your member request. You will be notified once your request is approved."));
 
         }catch(Exception $exception){
@@ -64,8 +64,9 @@ class AuthController extends Controller
 
     /**
      * @param Request $request
+     * @return RedirectResponse
      */
-    public function login(Request $request)
+    public function login(Request $request): RedirectResponse
     {
         $data = $request->validate([
             'email' => 'required|email',
@@ -102,7 +103,7 @@ class AuthController extends Controller
      */
     public function profile(): View|Factory|Application
     {
-        $user = auth_user()->load('information.company', 'tags');
+        $user = Auth::user()->load('information.company', 'tags');
         //$reference = $this->user->findWithEmail($user->information->reference);
 
         return view('app.auth.profile', compact('user'));
