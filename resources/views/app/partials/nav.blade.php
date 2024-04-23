@@ -40,17 +40,17 @@
         </li>
 
         <li class="sidebar-item">
-            <a class="sidebar-link" href="/profile">
+            <a class="sidebar-link" href="javascript:void(0)">
                 <i class="align-middle" data-feather="briefcase"></i> <span class="  align-middle">Jobs</span>
             </a>
             <ul>
                 <li>
-                    <a class="sidebar-link" href="/profile">
+                    <a class="sidebar-link" href="/jobs/create">
                         <i class="align-middle" data-feather="plus"></i> <span class="  align-middle">New</span>
                     </a>
                 </li>
                 <li>
-                    <a class="sidebar-link" href="/profile">
+                    <a class="sidebar-link" href="/jobs">
                         <i class="align-middle" data-feather="list"></i> <span class="  align-middle">All</span>
                     </a>
                 </li>

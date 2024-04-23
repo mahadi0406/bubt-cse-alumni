@@ -1,7 +1,6 @@
 <?php
 
 use App\Enums\MsgType;
-use App\Models\User;
 use Illuminate\Contracts\Auth\Authenticatable;
 
 if (! function_exists('msg')) {

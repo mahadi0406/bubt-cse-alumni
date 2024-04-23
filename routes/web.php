@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\User\JobController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -29,4 +30,11 @@ Route::middleware('auth')->group(function(){
     Route::get('/members/request', [DashboardController::class, 'getMemberRequests'])->name('members.request');
     Route::get('/members/{id}/{status}', [DashboardController::class, 'refererChangeStatusPage'])->name('member.status.change');
     Route::post('/members/{id}/{status}', [DashboardController::class, 'refererChangeStatus'])->name('member.status.change.submit');
+
+
+    Route::prefix('jobs')->name('jobs')->group(function() {
+        Route::get('/', [JobController::class, 'index'])->name('index');
+        Route::get('/create', [JobController::class, 'create'])->name('create');
+    });
+
 });

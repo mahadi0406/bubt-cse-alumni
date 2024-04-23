@@ -15,16 +15,17 @@ return new class extends Migration
     {
         Schema::create('jobs', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('company_id')->nullable()->index();
             $table->string('title', 150)->index();
-            $table->foreignId('organization_id');
-            $table->tinyInteger('type')->comment('1: full time, 2: part time, 3: contract, 4: temporary');
-            $table->boolean('is_remote_allowed')->default(false);
-            $table->integer('max_salary')->default(0);
-            $table->tinyInteger('currency')->default(1);
-            $table->string('location', 200)->nullable();
             $table->text('description')->nullable();
-            $table->string('external_link', 250)->nullable();
-            $table->tinyInteger('status')->default(1)->comment('1: draft, 2: published, 3: archived');
+            $table->text('requirements')->nullable();
+            $table->string('location', 200)->nullable();
+            $table->boolean('is_remote_allowed')->default(false);
+            $table->decimal('salary_min')->default(0);
+            $table->decimal('salary_max')->default(0);
+            $table->string('currency', 10)->nullable();
+            $table->tinyInteger('type')->default(\App\Enums\Job\Type::FULL_TIME->value);
+            $table->tinyInteger('status')->default(\App\Enums\Job\Status::PENDING->value);
             $table->timestamps();
         });
     }
