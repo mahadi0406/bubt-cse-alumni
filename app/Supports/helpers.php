@@ -45,3 +45,15 @@ if (! function_exists('image_url')) {
 }
 
 
+
+if (!function_exists('replaceInputTitle')) {
+    /**
+     * @param $text
+     * @return string
+     */
+    function replaceInputTitle($text): string
+    {
+        return ucwords(preg_replace("/[^A-Za-z0-9 ]/", ' ', $text));
+    }
+}
+

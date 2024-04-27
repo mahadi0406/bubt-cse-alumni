@@ -32,9 +32,10 @@ Route::middleware('auth')->group(function(){
     Route::post('/members/{id}/{status}', [DashboardController::class, 'refererChangeStatus'])->name('member.status.change.submit');
 
 
-    Route::prefix('jobs')->name('jobs')->group(function() {
+    Route::prefix('jobs')->name('jobs.')->group(function() {
         Route::get('/', [JobController::class, 'index'])->name('index');
         Route::get('/create', [JobController::class, 'create'])->name('create');
+        Route::post('/store', [JobController::class, 'store'])->name('store');
     });
 
 });

@@ -21,8 +21,8 @@ return new class extends Migration
             $table->text('requirements')->nullable();
             $table->string('location', 200)->nullable();
             $table->boolean('is_remote_allowed')->default(false);
-            $table->decimal('salary_min')->default(0);
-            $table->decimal('salary_max')->default(0);
+            $table->decimal('minimum_salary')->default(0);
+            $table->decimal('maximum_salary')->default(0);
             $table->string('currency', 10)->nullable();
             $table->tinyInteger('type')->default(\App\Enums\Job\Type::FULL_TIME->value);
             $table->tinyInteger('status')->default(\App\Enums\Job\Status::PENDING->value);
