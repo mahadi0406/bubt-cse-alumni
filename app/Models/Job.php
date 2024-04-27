@@ -5,16 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Job extends Model
 {
     use HasFactory;
 
     protected $fillable = [
+        'user_id',
         'company_id',
         'title',
         'description',
-        'requirements',
+        'requirement',
         'location',
         'is_remote_allowed',
         'currency',
@@ -28,13 +30,14 @@ class Job extends Model
         'status',
     ];
 
-    public function tags(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
-    {
-        return $this->belongsToMany(Tag::class, 'job_tags');
-    }
-
     public function company(): BelongsTo
     {
         return $this->belongsTo(Company::class);
     }
+
+    public function tags(): BelongsToMany
+    {
+        return $this->belongsToMany(Tag::class, 'job_tags', 'job_id', 'tag_id');
+    }
+
 }

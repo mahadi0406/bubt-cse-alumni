@@ -46,8 +46,8 @@
 
                            <div class="col-lg-12">
                                <div class="form-group">
-                                   <label for="tags" class="form-label">Skills</label>
-                                   <select class="form-select tags" id="tags" name="tags[]" multiple="multiple" required>
+                                   <label for="skills" class="form-label">Skills</label>
+                                   <select class="form-select tags" id="skills" name="skills[]" multiple="multiple" required>
                                    </select>
                                </div>
                            </div>

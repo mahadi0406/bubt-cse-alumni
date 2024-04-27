@@ -25,7 +25,7 @@
                         <td>{{ $job->deadline }}</td>
                         <td>{{ \App\Enums\Job\Status::getName((int)$job->status) }}</td>
                         <td>
-                            <a href="" >Edit</a>
+                            <a href="{{ route('jobs.edit', $job->id) }}">Edit</a>
                         </td>
                     </tr>
                 @endforeach

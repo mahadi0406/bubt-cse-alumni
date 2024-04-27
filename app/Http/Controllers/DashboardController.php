@@ -28,7 +28,7 @@ class DashboardController extends Controller
     public function index(): View|Factory|Application
     {
         $users = $this->user->adminGetAllUser();
-        $jobs = $this->jobService->getJobs(['company']);
+        $jobs = $this->jobService->getJobs(with: ['company']);
 
         return view('dashboard', compact('users', 'jobs'));
     }
