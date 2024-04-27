@@ -11,4 +11,15 @@ enum Status: int
     case ARCHIVED = 3;
     case REJECTED = 4;
 
+    public static function getName(int $status): string
+    {
+        return match ($status) {
+            self::PENDING->value => 'Pending',
+            self::PUBLISHED->value => 'Published',
+            self::ARCHIVED->value => 'Archived',
+            self::REJECTED->value => 'Rejected',
+            default => 'Default'
+        };
+    }
+
 }

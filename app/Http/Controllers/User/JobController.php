@@ -22,7 +22,7 @@ class JobController extends Controller
     public function index(): View
     {
         $title = "Manage Jobs";
-        $jobs = $this->jobService->getJobs();
+        $jobs = $this->jobService->getJobs(['company']);
 
         return view('app.job.index', compact('title', 'jobs'));
     }
@@ -40,6 +40,5 @@ class JobController extends Controller
     {
         $this->jobService->save($this->jobService->prepParams($request));
         return redirect()->route('jobs.create')->with('success', 'Job created successfully!');
-
     }
 }

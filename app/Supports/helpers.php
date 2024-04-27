@@ -57,3 +57,16 @@ if (!function_exists('replaceInputTitle')) {
     }
 }
 
+
+if (!function_exists('showDateTime')) {
+    /**
+     * @param string|null $date
+     * @param string $format
+     * @return string
+     */
+    function showDateTime(string $date = null, string $format = 'Y-m-d h:i A'): string
+    {
+        return \Carbon\Carbon::parse($date)->format($format);
+    }
+}
+

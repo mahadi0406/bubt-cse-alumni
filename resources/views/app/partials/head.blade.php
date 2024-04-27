@@ -15,6 +15,8 @@
 <title>BUBT Alumni</title>
 
 <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+<link href="{{ asset('css/summernote-lite.min.css') }}" rel="stylesheet">
+<link href="{{ asset('illumine-admin/assets/css/select2.min.css') }}" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
 <!-- Font Awesome -->

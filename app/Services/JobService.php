@@ -9,9 +9,15 @@ use Illuminate\Pagination\AbstractPaginator;
 
 class JobService
 {
-    public function getJobs(): AbstractPaginator
+    public function getJobs(array $with = []): AbstractPaginator
     {
-        return Job::latest()->paginate();
+        $query = Job::query();
+
+        if(!empty($with)){
+            $query->with($with);
+        }
+
+        return $query->latest()->paginate();
     }
 
 
@@ -28,7 +34,11 @@ class JobService
             'maximum_salary' => $request->input('maximum_salary'),
             'currency' => $request->input('currency'),
             'type' => $request->input('type'),
-            'status' => Status::PENDING->value,
+            'vacancies' => $request->input('vacancies'),
+            'deadline' => $request->input('deadline'),
+            'office_time' => $request->input('office_time'),
+            'benefits' => $request->input('benefits'),
+            'status' => Status::PUBLISHED->value,
         ];
     }
 

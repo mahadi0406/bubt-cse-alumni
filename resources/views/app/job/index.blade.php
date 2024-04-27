@@ -9,6 +9,9 @@
                 <thead>
                     <tr>
                         <th>Name</th>
+                        <th>Company</th>
+                        <th>Vacancies</th>
+                        <th>Deadline</th>
                         <th>Status</th>
                         <th>Actions</th>
                     </tr>
@@ -16,7 +19,14 @@
                 <tbody>
                 @foreach($jobs as $job)
                     <tr>
-                        <td>{{ $job->id }}</td>
+                        <td>{{ $job->title }}</td>
+                        <td>{{ $job->company->name }}</td>
+                        <td>{{ $job->vacancies }}</td>
+                        <td>{{ $job->deadline }}</td>
+                        <td>{{ \App\Enums\Job\Status::getName((int)$job->status) }}</td>
+                        <td>
+                            <a href="" >Edit</a>
+                        </td>
                     </tr>
                 @endforeach
                 </tbody>

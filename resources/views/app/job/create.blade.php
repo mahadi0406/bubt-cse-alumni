@@ -46,42 +46,23 @@
 
                            <div class="col-lg-12">
                                <div class="form-group">
+                                   <label for="tags" class="form-label">Skills</label>
+                                   <select class="form-select tags" id="tags" name="tags[]" multiple="multiple" required>
+                                   </select>
+                               </div>
+                           </div>
+
+                           <div class="col-lg-12">
+                               <div class="form-group">
                                    <label for="description" class="form-label">Description</label>
-                                   <textarea name="description" id="description" class="form-control" placeholder="Enter Description" required></textarea>
+                                   <textarea name="description" id="description" class="form-control summernote" placeholder="Enter Description" required></textarea>
                                </div>
                            </div>
 
                            <div class="col-lg-12">
                                <div class="form-group">
                                    <label for="requirement" class="form-label">Requirement</label>
-                                   <textarea name="requirement" id="requirement" class="form-control" placeholder="Enter Requirement" required></textarea>
-                               </div>
-                           </div>
-
-                           <div class="col-lg-4">
-                               <div class="form-group">
-                                   <label for="location" class="form-label">Location</label>
-                                   <input type="text" name="location" value="{{ old('location') }}"  id="location" class="form-control" placeholder="Enter Location" required>
-                               </div>
-                           </div>
-
-                           <div class="col-lg-4">
-                               <label></label>
-                               <div class="form-check">
-                                   <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                   <label class="form-check-label" for="exampleCheck1">Remote Allowed</label>
-                               </div>
-                           </div>
-
-                           <div class="col-lg-4">
-                               <div class="form-group">
-                                   <label for="type" class="form-label">Type</label>
-                                   <select class="form-select" name="type" id="type" required>
-                                       <option value="">Select Type</option>
-                                       @foreach(\App\Enums\Job\Type::array() as $key =>  $status)
-                                           <option value="{{ $key }}">{{ replaceInputTitle($status) }}</option>
-                                       @endforeach
-                                   </select>
+                                   <textarea name="requirement" id="requirement" class="form-control summernote" placeholder="Enter Requirement" required></textarea>
                                </div>
                            </div>
 
@@ -115,6 +96,61 @@
                                    </div>
                                </div>
                            </div>
+
+                           <div class="col-lg-4">
+                               <div class="form-group">
+                                   <label for="location" class="form-label">Location</label>
+                                   <input type="text" name="location" value="{{ old('location') }}"  id="location" class="form-control" placeholder="Enter Location" required>
+                               </div>
+                           </div>
+
+                           <div class="col-lg-4">
+                               <label></label>
+                               <div class="form-check">
+                                   <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                   <label class="form-check-label" for="exampleCheck1">Remote Allowed</label>
+                               </div>
+                           </div>
+
+                           <div class="col-lg-4">
+                               <div class="form-group">
+                                   <label for="type" class="form-label">Type</label>
+                                   <select class="form-select" name="type" id="type" required>
+                                       <option value="">Select Type</option>
+                                       @foreach(\App\Enums\Job\Type::array() as $key =>  $status)
+                                           <option value="{{ $key }}">{{ replaceInputTitle($status) }}</option>
+                                       @endforeach
+                                   </select>
+                               </div>
+                           </div>
+
+                           <div class="col-lg-4">
+                               <div class="form-group">
+                                   <label for="vacancies" class="form-label">Vacancies</label>
+                                   <input type="text" name="vacancies" value="{{ old('vacancies') }}"  id="vacancies" class="form-control" placeholder="Enter Vacancies" required>
+                               </div>
+                           </div>
+
+                           <div class="col-lg-4">
+                               <div class="form-group">
+                                   <label for="deadline" class="form-label">Deadline</label>
+                                   <input type="date" name="deadline" value="{{ old('deadline') }}"  id="deadline" class="form-control" placeholder="Enter deadline" required>
+                               </div>
+                           </div>
+
+                           <div class="col-lg-4">
+                               <div class="form-group">
+                                   <label for="office_time" class="form-label">Office Time</label>
+                                   <input type="text" name="office_time" value="{{ old('office_time') }}"  id="office_time" class="form-control" placeholder="Enter Office Time" required>
+                               </div>
+                           </div>
+
+                           <div class="col-lg-12">
+                               <div class="form-group">
+                                   <label for="benefits" class="form-label">Benefits</label>
+                                   <textarea name="benefits" id="benefits" class="form-control summernote" placeholder="Enter benefits" required></textarea>
+                               </div>
+                           </div>
                        </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
@@ -124,22 +160,54 @@
     </div>
 @endsection
 
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const currencyInput = document.getElementById("currency");
-        const currencySpan = document.querySelectorAll(".salary-currency-text");
-
-        currencyInput.addEventListener("input", function() {
-            const newCurrency = currencyInput.value.trim();
-            if (newCurrency !== "") {
-                currencySpan.forEach(span => {
-                    span.textContent = newCurrency;
-                });
-            }else{
-                currencySpan.forEach(span => {
-                    span.textContent = 'BDT';
-                });
-            }
+@push('scripts')
+    <script>
+        $(document).ready(function () {
+            $('.summernote').summernote({
+                height: 300,
+                dialogsInBody: true,
+                toolbar: [
+                    ['style', ['bold', 'italic', 'underline', 'clear']],
+                    ['font', ['strikethrough', 'superscript', 'subscript']],
+                    ['fontsize', ['fontsize']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['height', ['height']],
+                    ['fullscreen'],
+                    ['insert', ['picture', 'link', 'video']],
+                ],
+                callbacks: {
+                    onInit: function() {
+                    }
+                }
+            });
+            $(".note-image-input").removeAttr('name');
         });
-    });
-</script>
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const currencyInput = document.getElementById("currency");
+            const currencySpan = document.querySelectorAll(".salary-currency-text");
+
+            currencyInput.addEventListener("input", function() {
+                const newCurrency = currencyInput.value.trim();
+                if (newCurrency !== "") {
+                    currencySpan.forEach(span => {
+                        span.textContent = newCurrency;
+                    });
+                }else{
+                    currencySpan.forEach(span => {
+                        span.textContent = 'BDT';
+                    });
+                }
+            });
+        });
+
+        $('.tags').select2({
+            tags: true,
+            tokenSeparators: [',']
+        });
+    </script>
+
+@endpush
+
+

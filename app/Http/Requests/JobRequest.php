@@ -35,6 +35,10 @@ class JobRequest extends FormRequest
             'currency' => ['required', 'string'],
             'minimum_salary' => ['required', 'numeric', 'min:0'],
             'maximum_salary' => ['required', 'numeric', 'min:0', 'gte:minimum_salary'],
+            'vacancies' => ['required', 'numeric'],
+            'deadline' =>  ['required', 'date'],
+            'office_time' => ['required',],
+            'benefits' => ['nullable'],
         ];
     }
 }
