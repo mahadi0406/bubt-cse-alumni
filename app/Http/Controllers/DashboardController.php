@@ -21,7 +21,6 @@ class DashboardController extends Controller
     )
     {}
 
-
     /**
      * @return Application|Factory|View
      */
@@ -33,7 +32,15 @@ class DashboardController extends Controller
         return view('dashboard', compact('users', 'jobs'));
     }
 
-    public function getMemberRequests(Request $request)
+    public function jobDetail(string|int $id): View
+    {
+        $job = $this->jobService->findById($id);
+
+        return view('app.job.details', compact('job'));
+
+    }
+
+    public function getMemberRequests(Request $request): \Illuminate\View\View
     {
         $members = MemberRequest::select('id', 'name', 'mobile', 'status', 'intake', 'shift')
             ->where('referer_id', auth_user()->id)
@@ -41,6 +48,11 @@ class DashboardController extends Controller
             ->get();
 
         return \view('app.member.requests', compact('members'));
+    }
+
+    public function getReferral(): \Illuminate\View\View
+    {
+        return \view('app.member.referral');
     }
 
     public function refererChangeStatusPage(Request $request, $id, $status)

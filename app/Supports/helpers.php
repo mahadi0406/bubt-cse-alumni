@@ -70,3 +70,15 @@ if (!function_exists('showDateTime')) {
     }
 }
 
+
+
+if (!function_exists('shortAmount')) {
+    /**
+     * @param float|int|string|null $amount
+     * @return string|bool
+     */
+    function shortAmount(float|int|string|null $amount): string|bool
+    {
+        return round($amount,2);
+    }
+}

@@ -33,7 +33,7 @@
                             <small>No of vacancies: {{ $job->vacancies }}</small>
                         </div>
                         <div class="col-lg-3 p-3 border-end text-center">
-                            <a href="#" class="btn btn-md btn-info text-white">Apply Now</a>
+                            <a href="{{ route('job.detail', $job->id) }}" class="btn btn-md btn-info text-white">Details</a>
                         </div>
                     </div>
                 @endforeach

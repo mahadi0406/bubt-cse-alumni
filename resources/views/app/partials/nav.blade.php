@@ -4,10 +4,7 @@
     </a>
 
     <ul class="sidebar-nav">
-        <li class="sidebar-header">
-            Menu
-        </li>
-
+        <li class="sidebar-header"> Menu </li>
         <li class="sidebar-item">
             <a class="sidebar-link" href="/dashboard">
                 <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
@@ -15,7 +12,7 @@
         </li>
 
         <li class="sidebar-item">
-            <a class="sidebar-link" href="/profile">
+            <a class="sidebar-link" href="javascript:void(0)">
                 <i class="align-middle" data-feather="users"></i> <span class="  align-middle">Members</span>
             </a>
 
@@ -26,7 +23,7 @@
                     </a>
                 </li>
                 <li>
-                    <a class="sidebar-link" href="/profile">
+                    <a class="sidebar-link" href="{{ route('members.referral') }}">
                         <i class="align-middle" data-feather="link"></i> <span class="  align-middle">My Referral</span>
                     </a>
                 </li>
@@ -34,23 +31,16 @@
         </li>
 
         <li class="sidebar-item">
-            <a class="sidebar-link" href="javascript:void(0)">
-                <i class="align-middle" data-feather="briefcase"></i> <span class="  align-middle">Jobs</span>
+            <a class="sidebar-link" href="/jobs">
+                <i class="align-middle" data-feather="briefcase"></i> <span class="align-middle">Jobs</span>
             </a>
-            <ul>
-                <li>
-                    <a class="sidebar-link" href="/jobs/create">
-                        <i class="align-middle" data-feather="plus"></i> <span class="  align-middle">New</span>
-                    </a>
-                </li>
-                <li>
-                    <a class="sidebar-link" href="/jobs">
-                        <i class="align-middle" data-feather="list"></i> <span class="  align-middle">All</span>
-                    </a>
-                </li>
-            </ul>
         </li>
+
+        <li class="sidebar-item">
+            <a class="sidebar-link" href="/jobs">
+                <i class="align-middle" data-feather="calendar"></i> <span class="align-middle">Event</span>
+            </a>
+        </li>
+
     </ul>
-
-
 </nav>
