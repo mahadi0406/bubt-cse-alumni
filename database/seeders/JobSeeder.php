@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Company;
 use App\Models\Job;
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -34,6 +35,7 @@ class JobSeeder extends Seeder
 
         foreach ($jobTitles as $index => $title) {
             Job::create([
+                'user_id' => User::pluck('id')->random(),
                 'company_id' => Company::pluck('id')->random(),
                 'title' => $title,
                 'description' => $jobDescriptions,

@@ -48,6 +48,9 @@
                                <div class="form-group">
                                    <label for="skills" class="form-label">Skills</label>
                                    <select class="form-select tags" id="skills" name="skills[]" multiple="multiple" required>
+                                       @foreach($tags as $tag)
+                                            <option value="{{ $tag->name }}">{{ $tag->name }}</option>
+                                       @endforeach
                                    </select>
                                </div>
                            </div>

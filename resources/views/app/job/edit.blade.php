@@ -48,12 +48,13 @@
                                 <div class="form-group">
                                     <label for="skills" class="form-label">Skills</label>
                                     <select class="form-select tags" id="skills" name="skills[]" multiple="multiple" required>
-                                        @foreach($job->tags as $tag)
-                                            <option value="{{ $tag->name }}" selected>{{ $tag->name }}</option>
+                                        @foreach($tags as $tag)
+                                            <option value="{{ $tag->name }}" {{ in_array($tag->name, $job->tags->pluck('name')->toArray()) ? 'selected' : '' }}>{{ $tag->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
+
 
                             <div class="col-lg-12">
                                 <div class="form-group">

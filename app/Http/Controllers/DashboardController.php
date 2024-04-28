@@ -40,7 +40,6 @@ class DashboardController extends Controller
         $job = $this->jobService->findById($id);
 
         return view('app.job.details', compact('job'));
-
     }
 
     public function getMemberRequests(Request $request): \Illuminate\View\View
@@ -53,12 +52,7 @@ class DashboardController extends Controller
         return \view('app.member.requests', compact('members'));
     }
 
-    public function getReferral(): \Illuminate\View\View
-    {
-        return \view('app.member.referral');
-    }
-
-    public function refererChangeStatusPage(Request $request, $id, $status)
+    public function refererChangeStatusPage(Request $request, $id, $status): View|Factory|Application|\Illuminate\Http\RedirectResponse
     {
         $member = MemberRequest::findOrFail($id);
         if ($member->referer_id != auth_user()->id) {
@@ -97,7 +91,6 @@ class DashboardController extends Controller
 
         $member->status = $statues[$status];
         $member->referer_note = $data['referer_note'];
-
         $member->save();
 
         return redirect()->route('members.request')->with(msg('Request '. $status . ' successfully.', MsgType::success));

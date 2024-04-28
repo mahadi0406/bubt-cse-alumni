@@ -6,9 +6,6 @@
         .list-none{
             list-style: none !important;
         }
-        .h-100vh{
-            height: 100vh;
-        }
 
         .event-list li{
             display: flex;
@@ -67,6 +64,7 @@
                         </div>
                     </div>
                 @endforeach
+                    {{ $jobs->links() }}
             </div>
         </section>
         @include('app.partials.footer')

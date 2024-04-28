@@ -7,6 +7,11 @@ use Illuminate\Support\Str;
 
 class TagService
 {
+    public function getTags()
+    {
+        return Tag::select('name')->get();
+    }
+
     public function prepParams(string $tag): array
     {
         return [

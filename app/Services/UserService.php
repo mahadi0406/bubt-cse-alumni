@@ -18,6 +18,10 @@ use Illuminate\Support\Facades\DB;
 
 class UserService extends Service
 {
+    public function find(string|int $id): ?User
+    {
+        return User::find($id);
+    }
     /**
      * @param $id
      * @return User
@@ -56,7 +60,7 @@ class UserService extends Service
             'password',
             'mobile',
             'status'
-            ]));
+        ]));
     }
 
     /**

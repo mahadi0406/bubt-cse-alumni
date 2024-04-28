@@ -40,6 +40,7 @@ Route::middleware('auth')->group(function(){
         Route::post('/store', [JobController::class, 'store'])->name('store');
         Route::get('/edit/{id}', [JobController::class, 'edit'])->name('edit');
         Route::post('/update/{id}', [JobController::class, 'update'])->name('update');
+        Route::post('/apply', [JobController::class, 'apply'])->name('apply');
     });
 });
 

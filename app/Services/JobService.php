@@ -11,19 +11,22 @@ use Illuminate\Support\Arr;
 class JobService
 {
 
-    public function __construct(protected TagService $tagService)
-    {
+    public function __construct(protected TagService $tagService){
 
     }
     public function getJobs(int|string $userId = null, array $with = []): AbstractPaginator
     {
         $query = Job::query();
 
+        if ($userId){
+            $query->where('user_id', $userId);
+        }
+
         if(!empty($with)){
             $query->with($with);
         }
 
-        return $query->latest()->paginate();
+        return $query->latest()->paginate(20);
     }
 
 

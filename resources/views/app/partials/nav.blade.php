@@ -22,11 +22,6 @@
                         <i class="align-middle" data-feather="phone-incoming"></i> <span class="  align-middle">All Requests</span>
                     </a>
                 </li>
-                <li>
-                    <a class="sidebar-link" href="{{ route('members.referral') }}">
-                        <i class="align-middle" data-feather="link"></i> <span class="  align-middle">My Referral</span>
-                    </a>
-                </li>
             </ul>
         </li>
 
