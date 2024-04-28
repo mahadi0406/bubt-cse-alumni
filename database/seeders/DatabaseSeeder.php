@@ -18,5 +18,14 @@ class DatabaseSeeder extends Seeder
             CompanySeeder::class,
             UserSeeder::class,
         ]);
+
+        if (!app()->environment('production')) {
+            $this->call([
+                EventSeeder::class,
+                TagSeeder::class,
+                JobSeeder::class,
+                JobTagSeeder::class,
+            ]);
+        }
     }
 }

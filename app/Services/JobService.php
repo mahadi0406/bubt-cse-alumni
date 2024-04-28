@@ -54,7 +54,6 @@ class JobService
     {
         $job = Job::create($params);
 
-
         if(!blank(Arr::get($params, 'tags'))){
             $job->tags()->attach($this->tagService->saveTags(Arr::get($params, 'tags')));
         }
