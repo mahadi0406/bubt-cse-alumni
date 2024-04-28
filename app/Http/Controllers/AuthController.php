@@ -48,10 +48,7 @@ class AuthController extends Controller
                 'mobile' => 'required|min:11',
                 'intake' => 'required|integer',
                 'shift' => 'required',
-                'reference' => ['required_with:reference_by',
-                    $request->input('reference_by') == 'email' ? 'email' : '',
-                    'exists:users,email,' . $request->input('reference_by'),
-                ],
+                'reference' => 'required_with:reference_by' . ($request->input('reference_by') == 'email'? '|email|': '|') . 'exists:users,' . $request->input('reference_by'),
             ]);
 
             $this->user->createMemberJoiningRequest($request);

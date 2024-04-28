@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class EventService
 {
+
+    public function getEvents()
+    {
+       return Event::get();
+    }
     public function prepParams(Request $request): array
     {
         return  [

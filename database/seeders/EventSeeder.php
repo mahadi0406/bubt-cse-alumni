@@ -17,17 +17,8 @@ class EventSeeder extends Seeder
     {
         DB::table('events')->insert([
             [
-                'name' => 'Tech Summit Bangladesh 2024',
-                'description' => 'Annual technology summit bringing together industry leaders and innovators.',
-                'date_time' => '2024-07-20 10:00:00',
-                'location' => 'Bangabandhu International Conference Center, Dhaka',
-                'total_seats' => 1000,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
                 'name' => 'AI Workshop: Exploring Emerging Trends',
-                'description' => 'A workshop focusing on artificial intelligence and its applications in various industries.',
+                'description' => 'Annual technology summit, a pivotal gathering where industry luminaries, forward-thinking innovators, and passionate enthusiasts converge to exchange insights, explore emerging trends, and collectively propel the boundaries of technological advancement. It serves as a dynamic platform for fostering collaboration, nurturing talent, and catalyzing impactful initiatives that shape the future landscape of innovation.',
                 'date_time' => '2024-08-15 14:00:00',
                 'location' => 'Bangladesh University of Business and Technology (BUBT), Dhaka',
                 'total_seats' => 200,

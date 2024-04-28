@@ -26,7 +26,6 @@ class JobSeeder extends Seeder
         ];
 
         $jobDescriptions = "As a Software Developer, you will be responsible for the development and maintenance of software applications. You'll work on building and optimizing websites, creating mobile applications for iOS and Android platforms, and designing user interfaces and experiences. Additionally, you'll be involved in testing software to ensure quality and reliability, as well as managing and optimizing databases for performance and reliability.";
-
         $jobRequirements = "Bachelor's degree in Computer Science or a related field.
             Proficiency in programming languages such as Java, Python, or JavaScript.
             Experience with frameworks like Laravel, React, or Angular.

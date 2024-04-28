@@ -81,9 +81,7 @@ class UserController extends Controller
         ]);
 
         $user = $this->user->find($id);
-
-        if(!Auth::id() == $user->id && !Auth::user()->admin == 1)
-        {
+        if(!Auth::id() == $user->id && !Auth::user()->admin == 1) {
             return redirect()->back()->with([
                 'error' => 'Your not authorized for this action!'
             ]);

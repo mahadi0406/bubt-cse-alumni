@@ -44,9 +44,6 @@ Route::middleware('auth')->group(function(){
 });
 
 
-Route::get('/', function () {
-    return view('home');
-
-})->name('index');
+Route::get('/',[\App\Http\Controllers\HomeController::class, 'index'])->name('index');
 
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Enums\MemberRequestStatus;
 use App\Enums\MsgType;
 use App\Models\MemberRequest;
+use App\Services\EventService;
 use App\Services\JobService;
 use App\Services\UserService;
 use Illuminate\Contracts\Foundation\Application;
@@ -18,6 +19,7 @@ class DashboardController extends Controller
     public function __construct(
         protected UserService $user,
         protected JobService $jobService,
+        protected EventService $eventService
     )
     {}
 
@@ -28,8 +30,9 @@ class DashboardController extends Controller
     {
         $users = $this->user->adminGetAllUser();
         $jobs = $this->jobService->getJobs(with: ['company']);
+        $events = $this->eventService->getEvents();
 
-        return view('dashboard', compact('users', 'jobs'));
+        return view('dashboard', compact('users', 'jobs', 'events'));
     }
 
     public function jobDetail(string|int $id): View

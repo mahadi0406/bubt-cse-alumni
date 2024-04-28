@@ -8,6 +8,7 @@ use App\Models\MemberRequest;
 use App\Models\User;
 use Carbon\Carbon;
 use Exception;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
@@ -67,7 +68,7 @@ class UserService extends Service
     }
 
     /**
-     * @param $data
+     * @param Request $request
      * @return mixed
      * @throws Exception
      */
@@ -97,9 +98,10 @@ class UserService extends Service
 
     /**
      * @param Request $request
-     * @return MemberRequest
+     * @return Builder|Model
+     * @throws Exception
      */
-    public function createMemberJoiningRequest(Request $request): MemberRequest
+    public function createMemberJoiningRequest(Request $request): Builder|Model
     {
         $reference = User::where($request->input('reference_by'), $request->input('reference'))->first();
         if (!$reference) {
