@@ -101,7 +101,7 @@ class DashboardController extends Controller
             'phone' => $request->input('phone')
         ];
 
-        $subject = 'Notification Subject';
+        $subject = 'Membership Accept';
         SendNotificationJob::dispatch($recipient, $subject, $request->input('referer_note'));
 
         return redirect()->route('members.request')->with(msg('Request '. $status . ' successfully.', MsgType::success));

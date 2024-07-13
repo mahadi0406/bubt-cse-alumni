@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Enums\ContentType;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\JobRequest;
+use App\Jobs\SendNotificationJob;
 use App\Services\CandidateService;
 use App\Services\CompanyService;
+use App\Services\ContentService;
 use App\Services\JobService;
 use App\Services\TagService;
 use Illuminate\Http\RedirectResponse;
@@ -20,6 +23,7 @@ class JobController extends Controller
         protected CompanyService $companyService,
         protected TagService $tagService,
         protected CandidateService $candidateService,
+        protected ContentService $contentService
     ){
 
     }
@@ -73,7 +77,7 @@ class JobController extends Controller
         return redirect()->route('jobs.index')->with('success', 'Job updated successfully!');
     }
 
-    public function apply(Request $request)
+    public function apply(Request $request): RedirectResponse
     {
         $request->validate([
             'id' => ['required', Rule::exists('jobs', 'id')],
@@ -87,7 +91,16 @@ class JobController extends Controller
            abort(404);
         }
 
-        $this->candidateService->save($this->candidateService->prepParams($request, $job));
+        $subject = 'Job Application';
+        $candidate = $this->candidateService->save($this->candidateService->prepParams($request, $job));
+        $content = $this->contentService->getContent(ContentType::JOB_APPLY,['amount' => shortAmount($candidate->expected_salary)]);
+
+        SendNotificationJob::dispatch([
+                'email' => $candidate->user->email,
+                'phone' => $candidate->user->mobile
+            ],$subject,$content, $candidate->resume_link
+        );
+
         return back()->with('success', 'Thank you for applying for this job!');
     }
 }

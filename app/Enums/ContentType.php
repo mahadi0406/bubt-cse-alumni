@@ -2,7 +2,7 @@
 
 namespace App\Enums;
 
-enum ContentType
+enum ContentType: int
 {
-
+    case JOB_APPLY = 1;
 }
