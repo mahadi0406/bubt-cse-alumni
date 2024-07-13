@@ -78,7 +78,6 @@ class DashboardController extends Controller
 
 
         $member = MemberRequest::findOrFail($id);
-
         if ($member->referer_id != auth_user()->id) {
             return \redirect()->back()->with(msg('You are not authorized to change this request status.', MsgType::error));
         }
@@ -97,8 +96,8 @@ class DashboardController extends Controller
         $member->save();
 
         $recipient = [
-            'email' => $request->input('email'),
-            'phone' => $request->input('phone')
+            'email' => $member->email,
+            'phone' => $member->mobile
         ];
 
         $subject = 'Membership Accept';

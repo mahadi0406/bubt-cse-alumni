@@ -9,7 +9,10 @@ class ContentService
     public function getContent(ContentType $contentType, array $placeholders = []): ?string
     {
         $content = match ($contentType->value) {
-            ContentType::JOB_APPLY->value => 'Demo data :amount',
+            ContentType::JOB_APPLY->value => "A new job application has been received. Details:
+- Applicant's expected salary :amount
+
+Please review the application promptly.",
             default => null,
         };
 

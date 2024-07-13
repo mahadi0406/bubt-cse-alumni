@@ -18,7 +18,7 @@ class NotificationMail extends Mailable
      *
      * @return void
      */
-    public function __construct(public $subject, protected $message, protected $attachment = null){
+    public function __construct(public $subject, public $message, public $attachment = null){
 
     }
 

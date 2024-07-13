@@ -31,4 +31,11 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'sms' => [
+        'sslwireless' => [
+            'user' => env('SSL_SMS_USER'),
+            'password' => env('SSL_SMS_PASSWORD'),
+        ]
+    ]
+
 ];

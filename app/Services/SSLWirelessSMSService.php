@@ -9,14 +9,14 @@ class SSLWirelessSMSService
     const BASE_URL = 'https://sms.sslwireless.com';
     public Client $client;
     protected string $user;
-    protected string $pass;
+    protected string $password;
 
     public function __construct($baseUrl = null)
     {
         $baseUrl = $baseUrl ? $baseUrl : self::BASE_URL;
         $this->client = new Client(['base_uri' => $baseUrl, 'timeout' => 2.0]);
         $this->user = config('services.sms.sslwireless.user');
-        $this->pass = config('services.sms.sslwirelesssms.pass');
+        $this->password = config('services.sms.sslwireless.password');
     }
 
 
@@ -28,7 +28,7 @@ class SSLWirelessSMSService
         $response = $this->client->post('/api/v3/send-sms', [
             'form_params' => [
                 'user' => $this->user,
-                'pass' => $this->pass,
+                'pass' => $this->password,
                 'msisdn' => $to,
                 'sms' => $message,
             ],
