@@ -15,11 +15,9 @@ return new class extends Migration
     {
         Schema::create('candidates', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');
+            $table->foreignId('job_id')->index()->nullable();
+            $table->foreignId('user_id')->index()->nullable();
             $table->integer('expected_salary')->default(0);
-            $table->tinyInteger('expected_salary_currency');
-            $table->tinyInteger('type')->comment('1: full time, 2: part time, 3: contract, 4: temporary');
-            $table->boolean('is_remote_allowed')->default(false);
             $table->string('resume_link', 250)->nullable();
             $table->string('github_link', 100)->nullable();
             $table->string('portfolio_link', 100)->nullable();

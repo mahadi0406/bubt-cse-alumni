@@ -9,7 +9,9 @@ use App\Http\Controllers\Controller;
 use App\Models\MemberRequest;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class AlumniController extends Controller
 {
@@ -18,19 +20,19 @@ class AlumniController extends Controller
         $this->middleware('auth');
     }
 
-    public function index(Request $request)
+    public function index(Request $request): View
     {
         $alumni = \App\Models\User::with('information')->paginate();
         return view('admin.alumni.index', compact('alumni'));
 
     }
 
-    public function create(Request $request)
+    public function create(Request $request): View
     {
         return view('admin.alumni.create');
     }
 
-    public function changeStatus(Request $request, $id)
+    public function changeStatus(Request $request, $id): RedirectResponse
     {
         $data = $this->validate($request, [
             'status' => 'required'

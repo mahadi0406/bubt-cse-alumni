@@ -1,8 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     @include('app.partials.head')
+    <style>
+        .list-none{
+            list-style: none !important;
+        }
+
+        .event-list li{
+            display: flex;
+            justify-content: start;
+            align-items: center;
+        }
+        .event-list li span{
+            display: inline-block;
+        }
+        .event-list li span:first-child{
+            min-width: 100px;
+        }
+    </style>
 </head>
 
 <body>
@@ -10,76 +26,50 @@
     @include('app.partials.nav')
     <div class="main">
         @include('app.partials.top')
-
-        @if(Auth::user()->admin == 1)
-            :
-            <main class="content">
-                <div class="container-fluid p-0">
-                    <div class="card flex-fill">
-                        <div class="card-header">
-
-                            <h5 class="card-title mb-0">All Members</h5>
-                        </div>
-                        <table class="table table-hover my-0">
-                            <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th class="d-none d-xl-table-cell">Phone</th>
-                                <th class="d-none d-xl-table-cell">Referred By</th>
-                                <th class="d-none d-xl-table-cell">Status</th>
-                                <th></th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach($users as $user)
-                                <tr>
-                                    <td>{{$user->name}}</td>
-                                    <td class="d-none d-xl-table-cell">{{$user->mobile}}</td>
-                                    <td class="d-none d-xl-table-cell">
-                                        <a href="/user/{{App\Models\User::where('email', $user->information->reference)->get()->first()->id}}/profile">
-                                            {{App\Models\User::where('email', $user->information->reference)->get()->first()->name}}
-                                        </a>
-                                    </td>
-                                    <td class="d-none d-xl-table-cell"><span
-                                                class="btn btn-success">{{\App\Enums\UserStatus::from($user?->status)->name}}</span>
-                                    </td>
-                                    <th class="d-none d-md-table-cell">
-                                        <div class="dropdown">
-                                            <button class="btn btn-primary dropdown-toggle" type="button"
-                                                    id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-                                                    aria-expanded="false">
-                                                Action
-                                            </button>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                <a class="dropdown-item" href="/user/{{$user->id}}/profile">
-                                                    View
-                                                </a>
-                                                <a class="dropdown-item" href="#">Edit</a>
-                                                <a class="dropdown-item"
-                                                   href="{{route('user.status',['id'=>$user->id, 'status'=>1])}}">Approve</a>
-                                                <a class="dropdown-item"
-                                                   href="{{route('user.status',['id'=>$user->id, 'status'=>2])}}">Decline</a>
-                                            </div>
-                                        </div>
-                                    </th>
-                                </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
-
-                        <div class="ml-auto mt-3 p-3">
-                            {{ $users->links() }}
+        <section class="py-5 h-100vh">
+            <div class="container">
+                @foreach($events as $event)
+                    <div class="card p-lg-5 p-4 border-danger">
+                        <div class="row gy-4">
+                            <div class="col-lg-3">
+                                <ul class="event-list">
+                                    <li class="mb-2"><span class="fw-bold">Date: </span><span>{{ showDateTime($event->date_time, 'd F, Y') }}</span></li>
+                                    <li class="mb-2"><span class="fw-bold">Time: </span><span>{{ showDateTime($event->date_time, 'H:i:s') }}</span></li>
+                                    <li><span class="fw-bold">Location: </span><span>{{ $event->location }}</span></li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-9">
+                                <h4 class="mb-3 lh-1">{{ $event->name }}</h4>
+                                <p class="mb-4">{{ $event->description }}</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </main>
-        @endif
+                @endforeach
 
+                @foreach($jobs as $job)
+                    <div class="row mb-4 shadow-lg">
+                        <div class="col-lg-6 p-3">
+                            <h5>{{ $job->title }}</h5>
+                            <ul class="p-0 m-0 d-flex align-items-center gap-3 list-none">
+                                <li>{{ $job->company->name }}</li>
+                                <li>{{ $job->location }}</li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-3 p-3 border-end">
+                            <p>{{ showDateTime($job->deadline, 'd F, Y') }}</p>
+                            <small>No of vacancies: {{ $job->vacancies }}</small>
+                        </div>
+                        <div class="col-lg-3 p-3 border-end text-center">
+                            <a href="{{ route('job.detail', $job->id) }}" class="btn btn-md btn-info text-white">Details</a>
+                        </div>
+                    </div>
+                @endforeach
+                    {{ $jobs->links() }}
+            </div>
+        </section>
         @include('app.partials.footer')
     </div>
 </div>
-
 @include('app.partials.scripts')
 </body>
-
 </html>

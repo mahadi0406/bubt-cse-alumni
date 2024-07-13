@@ -1,5 +1,4 @@
 @extends('app.layouts.main')
-
 @section('heading', 'Member Requests')
 @section('sub_heading', "List of all member requests")
 @section('contents')
@@ -10,14 +9,14 @@
         <div class="card-body">
             <table class="table table-hover my-0">
                 <thead>
-                <tr>
-                    <th>Name</th>
-                    <th class="d-none d-xl-table-cell">Mobile</th>
-                    <th class="d-none d-xl-table-cell">Intake</th>
-                    <th class="d-none d-xl-table-cell">Shift</th>
-                    <th>Status</th>
-                    <th class="d-none d-md-table-cell">Actions</th>
-                </tr>
+                    <tr>
+                        <th>Name</th>
+                        <th class="d-none d-xl-table-cell">Mobile</th>
+                        <th class="d-none d-xl-table-cell">Intake</th>
+                        <th class="d-none d-xl-table-cell">Shift</th>
+                        <th>Status</th>
+                        <th class="d-none d-md-table-cell">Actions</th>
+                    </tr>
                 </thead>
                 <tbody>
                 @foreach($members as $member)
@@ -29,13 +28,13 @@
                         <td>
                             @php
                                 $statusClass = [
-                                        \App\Enums\MemberRequestStatus::pending->value => 'bg-warning',
-                                        \App\Enums\MemberRequestStatus::referer_accepted->value => 'bg-success',
-                                        \App\Enums\MemberRequestStatus::referer_declined->value => 'bg-danger',
+                                    \App\Enums\MemberRequestStatus::pending->value => 'bg-warning',
+                                    \App\Enums\MemberRequestStatus::referer_accepted->value => 'bg-success',
+                                    \App\Enums\MemberRequestStatus::referer_declined->value => 'bg-danger',
                                 ];
                             @endphp
-                            <span class="badge {{ $statusClass[$member->status] }}">{{ \App\Enums\MemberRequestStatus::from($member->status)->name }}
-                            </span></td>
+                            <span class="badge {{ $statusClass[$member->status] }}">{{ \App\Enums\MemberRequestStatus::from($member->status)->name }}</span>
+                        </td>
                         <td class="d-none d-md-table-cell">
                             @if($member->status == \App\Enums\MemberRequestStatus::pending->value)
                                 <a href="{{ route('member.status.change', ['id' => $member->id, 'status' => 'accept']) }}"
@@ -50,5 +49,4 @@
             </table>
         </div>
     </div>
-
 @endsection

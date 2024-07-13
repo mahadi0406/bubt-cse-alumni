@@ -67,7 +67,7 @@
                                         <div class="input-group input-group-lg">
                                             <select name="reference_by" class="form-select dropdown"
                                                     style="width: 25%;">
-                                                <option selected>By ...</option>
+                                                <option value="" selected>By ...</option>
                                                 <option value="email"
                                                         @if(old('reference_by') == 'email') selected @endif>Email
                                                 </option>
