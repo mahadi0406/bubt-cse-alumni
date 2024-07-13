@@ -12,7 +12,6 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 
 class DashboardController extends Controller
 {
@@ -69,7 +68,7 @@ class DashboardController extends Controller
         return \view('app.member.status-change', compact('member', 'status', 'class'));
     }
 
-    public function refererChangeStatus(Request $request, $id, $status)
+    public function refererChangeStatus(Request $request, $id, $status): \Illuminate\Http\RedirectResponse
     {
         $data = $this->validate($request, [
             'referer_note' => 'required',

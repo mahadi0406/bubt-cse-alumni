@@ -112,7 +112,6 @@ class UserService extends Service
             throw new \Exception("Reference not found");
         }
 
-        $user = Auth::user();
         $data = $request->except('_token');
         $data['referer_id'] = $reference->id;
 
