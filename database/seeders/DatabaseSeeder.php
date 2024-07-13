@@ -17,15 +17,15 @@ class DatabaseSeeder extends Seeder
         $this->call([
             CompanySeeder::class,
             UserSeeder::class,
-            //IllumineAdminSeeder::class,
-            //RoleSeeder::class,
         ]);
 
-        // \App\Models\User::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        if (!app()->environment('production')) {
+            $this->call([
+                EventSeeder::class,
+                TagSeeder::class,
+                JobSeeder::class,
+                JobTagSeeder::class,
+            ]);
+        }
     }
 }
