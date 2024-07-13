@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Enums\MemberRequestStatus;
 use App\Enums\MsgType;
+use App\Jobs\SendNotificationJob;
 use App\Models\MemberRequest;
 use App\Services\EventService;
 use App\Services\JobService;
@@ -54,6 +55,7 @@ class DashboardController extends Controller
     public function refererChangeStatusPage(Request $request, $id, $status): View|Factory|Application|\Illuminate\Http\RedirectResponse
     {
         $member = MemberRequest::findOrFail($id);
+
         if ($member->referer_id != auth_user()->id) {
             return \redirect()->back()->with(msg('You are not authorized to change this request status.', MsgType::error));
         }
@@ -74,7 +76,9 @@ class DashboardController extends Controller
             'referer_note' => 'required',
         ]);
 
+
         $member = MemberRequest::findOrFail($id);
+
         if ($member->referer_id != auth_user()->id) {
             return \redirect()->back()->with(msg('You are not authorized to change this request status.', MsgType::error));
         }
@@ -91,6 +95,14 @@ class DashboardController extends Controller
         $member->status = $statues[$status];
         $member->referer_note = $data['referer_note'];
         $member->save();
+
+        $recipient = [
+            'email' => $request->input('email'),
+            'phone' => $request->input('phone')
+        ];
+
+        $subject = 'Notification Subject';
+        SendNotificationJob::dispatch($recipient, $subject, $request->input('referer_note'));
 
         return redirect()->route('members.request')->with(msg('Request '. $status . ' successfully.', MsgType::success));
 
